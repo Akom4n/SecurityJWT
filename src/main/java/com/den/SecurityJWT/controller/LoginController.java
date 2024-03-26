@@ -9,12 +9,16 @@ import com.den.SecurityJWT.security.JWTObject;
 import com.den.SecurityJWT.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Date;
 
-@RestController
+@Controller
 public class LoginController {
     @Autowired
     private PasswordEncoder encoder;
@@ -22,6 +26,13 @@ public class LoginController {
     private SecurityConfig securityConfig;
     @Autowired
     private UserRepository repository;
+
+    @GetMapping("/login")
+    public ModelAndView logar () {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("formLogin.html");
+        return modelAndView;
+    }
 
     @PostMapping("/login")
     public Sessao logar(@RequestBody Login login){
